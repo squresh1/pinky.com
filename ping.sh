@@ -7,3 +7,5 @@ do
 
 	echo hello pinky 
 done
+
+echo "all fix now"
