@@ -8,4 +8,6 @@ do
 	echo hello pinky 
 done
 
+echo "its still not"
 echo "all fix now"
+
