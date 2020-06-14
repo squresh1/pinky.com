@@ -1,6 +1,5 @@
 #!/bin/bash
 x=192.168.1.9
-ping -c1 $x
-echo hello pinky 
-echo "all fix now"
+ping -c1 $y
+exit 0
 
