@@ -1,2 +1,0 @@
-# pinky.com
-faggots
