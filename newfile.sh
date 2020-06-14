@@ -1,2 +1,2 @@
 #!/bin/bash
- echo it newfile"
+ echo "it newfile"
