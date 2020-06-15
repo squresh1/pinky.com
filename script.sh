@@ -1,2 +1,2 @@
 #!/bin/bash
-echo " why why why !
+echo "why why why"
