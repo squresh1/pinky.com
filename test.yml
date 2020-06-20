@@ -2,7 +2,6 @@
 - hosts: test
   become: yes 
 - name: install Apache webserver
-  hosts: webservers
 
   tasks:
        - name: install httpd
