@@ -3,7 +3,7 @@
   hosts: test
   become: yes 
   tasks:
-  - name: install httpd
-    yum:  
-      name: httpd  
-      State: latest
+  - name: install the latest version of Apache
+    yum:
+      name: httpd
+      state: latest
