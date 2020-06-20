@@ -1,8 +1,7 @@
 ---
-- hosts: test
-  become: yes 
 - name: install Apache webserver
-
+  hosts: test
+  become: yes 
   tasks:
        - name: install httpd
          yum:  
