@@ -5,7 +5,7 @@
   tasks:
   - name: install the latest version of Apache
     yum:
-      name: *
+      name: "*"
       state: latest
   - name: reboot afteryum update
     reboot:
