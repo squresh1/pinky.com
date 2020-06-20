@@ -1,5 +1,5 @@
 ---
-- host: test
+- hosts: test
   become: yes 
 - name: install Apache webserver
   hosts: webservers
