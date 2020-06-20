@@ -5,8 +5,10 @@
   tasks:
   - name: install the latest version of Apache
     yum:
-      name: "*"
+      name: httpd
       state: latest
-  - name: reboot afteryum update
-    reboot:
+  - name: start httpd service 
+    service:
+      name: httpd
+      state: started
       
