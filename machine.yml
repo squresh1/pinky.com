@@ -1,0 +1,26 @@
+--- 
+- name: "Server deployment"
+  hosts: localhost
+  tasks:
+  - name: Create a virtual machine on given ESXi hostname
+    vmware_guest:
+      hostname: 192.168.1.250
+      username: administrator@vshpere.local
+      password: Welcome!1
+      validate_certs: no
+      datacenter: Personal
+      folder: Discovered virtual machine
+      name: testvmdeployment
+      state: poweredon
+      guest_id: centos64Guest
+      esxi_hostname: 192.168.1.200
+      disk:
+      - size_gb: 16
+        type: thin
+        datastore: Server
+      hardware:
+        memory_mb: 5000
+        num_cpus: 2
+        scsi: paravirtual
+      networks:
+        - name: VM Network
