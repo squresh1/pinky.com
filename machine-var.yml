@@ -1,0 +1,26 @@
+--- 
+- name: "Server deployment"
+  hosts: localhost
+  tasks:
+  - name: Create a virtual machine on given ESXi hostname
+    vmware_guest:
+      hostname: 192.168.1.250
+      username: administrator@vshpere.local
+      password: Welcome!1
+      validate_certs: no
+      datacenter: Personal
+      folder: Discovered virtual machine
+      name: "{{ VM_NAME }}"
+      state: "{{ POWER_STATE }}"
+      guest_id: {{OS_ID}}
+      esxi_hostname: 192.168.1.200
+      disk:
+      - size_gb: "{{ DISK_SIZE }}"
+        type: thin
+        datastore: Server
+      hardware:
+        memory_mb: "{{ MEMORY_MB }}"
+        num_cpus: "{{ NUM_VCPU }}"
+        scsi: paravirtual
+      networks:
+        - name: VM Network
