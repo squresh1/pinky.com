@@ -12,7 +12,7 @@
       folder: Discovered virtual machine
       name: "{{ VM_NAME }}"
       state: "{{ POWER_STATE }}"
-      guest_id: {{OS_ID}}
+      guest_id: {{ OS_ID }}
       esxi_hostname: 192.168.1.200
       disk:
       - size_gb: "{{ DISK_SIZE }}"
