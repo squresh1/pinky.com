@@ -1,13 +1,12 @@
---- 
-- 
+---
+-
   become: true
   hosts: 192.168.1.17
   name: "Pxe automation"
-  tasks: 
-
+  tasks:
+  
     - name: adding user and passwrd
       replace:
         path: /root/ks
         regexp: '^(network.+)$'
         replace: 'network  --bootproto=dhcp --device=ens192 --onboot=off --ipv6=auto --no-activate --hostname={{ VM_NAME }}'
-
