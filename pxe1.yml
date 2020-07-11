@@ -1,0 +1,28 @@
+--- 
+- 
+  become: true
+  hosts: 192.168.1.17
+  name: "Pxe automation"
+  tasks: 
+
+    - name: adding user and passwrd
+      replace:
+        path: /root/test
+        regexp: '^(default[ ]+)[^\n]+$'
+        replace: '\g<1>{{ NUM }}'
+
+    - name: adding user and passwrd
+      replace:
+        path: /root/ks
+        regexp: '^(network.+)$'
+        replace: 'network  --bootproto=dhcp --device=ens192 --onboot=off --ipv6=auto --no-activate --hostname=localhost.localdomain'
+
+
+
+#    - name: adding user and passwrd
+#      replace:
+#        path: /root/ks
+#        regexp: '^(network.+)$'
+#        replace: 'network  --hostname=servertest --ip=192.168.1.20 --netmask=255.255.255.0 --gateway=192.168.1.1 --nameserver=192.168.1.1 --device=ens192 --noipv6 --bootproto=static --onboot=yes'
+#      when: {{ STATIC }} == STATIC
+
