@@ -7,6 +7,14 @@
   
     - name: Setting up Dynamic IP 
       replace:
-        path: /root/ks
+        path: /var/ftp/pub/ks.cfg
         regexp: '^(network.+)$'
         replace: 'network  --bootproto=dhcp --device=ens192 --onboot=off --ipv6=auto --no-activate --hostname={{ VM_NAME }}'
+
+    - name: Restarting services now
+      service:
+        name: "{{ item.services }}"
+        state: restarted
+      with_items:
+        - { services: 'dnsmasq' }
+        - { services: 'vsftpd' }

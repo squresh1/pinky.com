@@ -6,8 +6,14 @@
   tasks: 
     - name: Assigning Static route to VM 
       replace:
-        path: /root/ks
+        path: /var/ftp/pub/ks.cfg
         regexp: '^(network.+)$'
         replace: 'network  --hostname={{ VM_NAME }} --ip={{ IP }} --netmask={{ NETMASK }} --gateway={{ GATEWAY }} --nameserver={{ DNS }} --device=ens192 --noipv6 --bootproto=static --onboot=yes'
       
-
+    - name: Restarting services now
+      service:
+        name: "{{ item.services }}"
+        state: restarted
+      with_items:
+        - { services: 'dnsmasq' }
+        - { services: 'vsftpd' }

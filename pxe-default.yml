@@ -7,6 +7,6 @@
 
     - name: Selecting Kick- Start file for imaging
       replace:
-        path: /root/test
+        path: /var/lib/tftpboot/pxelinux.cfg/default
         regexp: '^(default[ ]+)[^\n]+$'
         replace: '\g<1>{{ OS_image }}'
