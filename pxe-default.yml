@@ -2,10 +2,10 @@
 - 
   become: true
   hosts: 192.168.1.17
-  name: "Pxe automation"
+  name: "Kick-Start file"
   tasks: 
 
-    - name: adding user and passwrd
+    - name: Selecting Kick- Start file for imaging
       replace:
         path: /root/test
         regexp: '^(default[ ]+)[^\n]+$'
