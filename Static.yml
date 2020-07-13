@@ -8,7 +8,7 @@
       replace:
         path: /var/ftp/pub/ks.cfg
         regexp: '^(network.+)$'
-        replace: 'network  --hostname={{ VM_NAME }} --ip={{ IP }} --netmask={{ NETMASK }} --gateway={{ GATEWAY }} --nameserver={{ DNS }} --device=ens192 --noipv6 --bootproto=static --onboot=yes'
+        replace: 'network  --hostname={{ VM_NAME }} --ip={{ IP_ADDR }} --netmask={{ NETMASK }} --gateway={{ GATEWAY }} --nameserver={{ DNS }} --device=ens192 --noipv6 --bootproto=static --onboot=yes'
       
     - name: Restarting services now
       service:
