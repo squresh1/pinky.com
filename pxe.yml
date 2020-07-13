@@ -9,4 +9,4 @@
       replace:
         path: /root/test
         regexp: '^(default[ ]+)[^\n]+$'
-        replace: '\g<1>{{ PxE_option }}'
+        replace: '\g<1>{{ pxe }}'
