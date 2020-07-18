@@ -1,0 +1,71 @@
+--- 
+- 
+  become: true
+  hosts: test
+  name: "install tomcat application server meaow"
+  tasks: 
+    - 
+      name: "intalling Java"
+      yum: 
+        name: java-11-openjdk-devel
+        state: present
+      when: true
+    - 
+      name: checking the tomcat tar file exist
+      stat: 
+        path: /usr/local/tomcat9
+      register: tomcat9
+  
+   
+    - name: "Download Tomcat tar file"
+      get_url: 
+        dest: /usr/local
+        url: "https://mirrors.sonic.net/apache/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz"
+     
+    - 
+      name: "extrating tar file for tomcat"
+      unarchive: 
+        src: /usr/local/apache-tomcat-9.0.36.tar.gz
+        dest: /usr/local
+        remote_src: yes
+      when: tomcat9.stat.exists == false
+    
+    - name: renaming tomcat
+      shell: mv /usr/local/apache-tomcat-9.0.36 /usr/local/tomcat9
+      when: tomcat9.stat.exists == false   
+    - 
+      name: "creating vaiable"
+      shell:  
+        cmd: echo "export CATALINA_HOME="/usr/local/tomcat9"" >> /root/.bashrc
+        cmd: source /root/.bashrc
+      when: false
+      
+    - name: adding user and passwrd 
+      lineinfile:
+        dest: /usr/local/tomcat9/conf/tomcat-users.xml
+        insertbefore: '<\/tomcat-users>'
+        state: present
+        line: '  <user username="admin" password="adm!n" roles="manager-gui,admin-gui"/>'
+    
+    - name: Allowing IPadddress connection 
+      lineinfile:
+        dest: /usr/local/tomcat9/webapps/manager/META-INF/context.xml
+        insertafter: '<Valve className="org.apache.catalina.valves.RemoteAddrValve"'
+        state: present
+        line: "{{ item.line }}"
+      with_items: 
+        - { line: '        allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|192.168.1.5" />' } 
+        - { line: '        allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|192.168.1.*" /gt;' }
+
+    - name: adding user and passwrd
+      replace:
+        path: /usr/local/tomcat9/conf/server.xml
+        regexp: "{{ item.regexp }}"
+        replace:  "{{ item.line }}" 
+      with_items:
+        - { regexp: 'port="8080"', line: 'port="9090"' }    
+    
+    - name: starting tomcat 
+      shell:
+        cmd: nohup /usr/local/tomcat9/bin/shutdown.sh
+        cmd: nohup /usr/local/tomcat9/bin/startup.sh 
