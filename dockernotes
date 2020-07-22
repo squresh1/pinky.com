@@ -1,0 +1,8 @@
+docker network create -d macvlan --subnet=192.168.1.0/24 --ip-range=192.168.1.120/26 --gateway=192.168.1.1 -o macvlan_mode=bridge -o parent=ens192 pub_net
+yum group install 'Development Tools' 
+yum install zlib-devel openssl-devel
+
+
+on ESXi Host under nwtworking vswitch click / click edit / security
+
+enable promiscuous mode vmware
